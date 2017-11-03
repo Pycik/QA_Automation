@@ -29,6 +29,8 @@ public class FirstTest {
         element.sendKeys("Iphone");
         element.submit();
 
+        System.out.println("Page title is: " + driver.getTitle());
+
         WebElement iphone = driver.findElement(By.xpath(".//*[@id='rso']/div[2]/div/div[1]/div/div/h3/a"));
         iphone.click();
 
