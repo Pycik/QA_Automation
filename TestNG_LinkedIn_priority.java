@@ -1,8 +1,5 @@
-package WebDrive;
+package TestNG;
 
-
-import org.junit.*;
-import org.junit.runners.MethodSorters;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Action;
@@ -10,18 +7,22 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class TestNG_Linked {
 
-public class LinkedId {
     private static WebDriver driver;
 
     @BeforeClass
     public static void setup() {
+
+
 
         System.setProperty("webdriver.chrome.driver", "C:/Users/SPARK/workspace/chromedriver.exe");
         driver = new ChromeDriver();
@@ -30,11 +31,12 @@ public class LinkedId {
         driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
         driver.get("https://www.linkedin.com/");
+//        driver.manage().deleteAllCookies();
     }
 
-    @Test
-    public  void aTest() {
-                                             //***** Test1 (priority = 1) *****
+    @Test(priority=1)
+    public  void login() {
+        //***** Test1 (priority = 1) *****
         System.out.println("Start Test = 1");
         System.out.println("Page title is: " + driver.getTitle());
 
@@ -47,7 +49,27 @@ public class LinkedId {
 
         System.out.println("Page title is: " + driver.getTitle());
 
-                                             //***** @Test2 (priority = 2) *****
+        //***** @Test2 (priority = 2) *****
+
+
+        //***** @Test 3 (priority = 3) *****
+
+
+
+        //***** Test 4(priority = 4) *****
+
+
+        // ***** @Test (priority = 5) *****
+
+
+
+        //***** @Test 6(priority=6) *****
+
+    }
+
+    @Test(priority=2)
+    public  void  repositionPhoto() {
+
         System.out.println("Start Test = 2");
 
 // start validation
@@ -168,11 +190,18 @@ public class LinkedId {
         WebElement ChangeToNewWindow = driver.findElement(By.className("modal-wormhole-content"));
         ChangeToNewWindow.click();
 
+        WebElement clickThisModalWindow = driver.findElement(By.className("pe-form-footer__actions"));
+        clickThisModalWindow.click();
+
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+//
+//        WebElement waitModalWindowClick = (new WebDriverWait(driver, 10))
+//                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//[@data-artdeco-is-focused='true']")));
+//      waitModalWindowClick.click();
         //start validation
 
         String modalWindow = driver.findElement(By.className("modal-wormhole-content")).getAttribute("data-artdeco-is-focused");
@@ -209,8 +238,11 @@ public class LinkedId {
             e.printStackTrace();
         }
 
+    }
 
-                                             //***** @Test 3 (priority = 3) *****
+    @Test(priority=3)
+    public  void   changeLanguage() {
+
         System.out.println("Start Test = 3");
 
         WebElement settings = driver.findElement(By.id("nav-settings__dropdown"));
@@ -322,10 +354,10 @@ public class LinkedId {
         System.out.println("After Select another Language, Language is " + clickLanguageAfter);
         System.out.println("Page title is: " + driver.getTitle());
 
+    }
 
-
-                                        //***** Test 4(priority = 4) *****
-
+    @Test(priority=4)
+    public  void changePlacesSkills() {
 
         System.out.println("Start Test = 4");
 //Go back main Page
@@ -515,8 +547,10 @@ public class LinkedId {
             e.printStackTrace();
         }
 
+    }
 
-                                        // ***** @Test (priority = 5) *****
+    @Test(priority=5)
+    public  void attachFileMessage() {
 
         System.out.println("Start Test = 5");
 
@@ -560,9 +594,11 @@ public class LinkedId {
 
         textMessage.clear();
 
+    }
 
+    @Test(priority=6)
+    public  void  LogOut() {
 
-        //***** @Test 6(priority=6) *****
         System.out.println("Start Test = 6");
 
         WebElement btnProfile = driver.findElement(By.id("profile-nav-item"));
